@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
-class RecycleViewAdapter(private val dataList: ArrayList<DataClass>) :
+class RecycleViewAdapter(
+    private val dataList: List<GetAPIDataClass>,
+    private val mListener: (GetAPIDataClass?) -> Unit
+) :
+
     RecyclerView.Adapter<RecycleViewAdapter.ModelViewHolder>() {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModelViewHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.rv_item_layout, parent, false)
@@ -23,8 +26,15 @@ class RecycleViewAdapter(private val dataList: ArrayList<DataClass>) :
 
     override fun onBindViewHolder(holder: ModelViewHolder, position: Int) {
         val dataClass = dataList[position]
-        holder.rvImage.setImageResource(dataClass.imageUrl)
+
+        Glide.with(holder.itemView.context)
+            .load(dataClass.image)
+            .into(holder.rvImage)
+
         holder.rvTitle.text = dataClass.title
+        holder.itemView.setOnClickListener {
+            dataClass.let { it1 -> mListener.invoke(it1) }
+        }
     }
 
 
