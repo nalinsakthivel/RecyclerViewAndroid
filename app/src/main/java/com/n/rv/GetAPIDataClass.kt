@@ -7,4 +7,5 @@ data class GetAPIDataClass(
     val description: String,
     val category: String,
     val image: String,
-    )
+    val rating: Rating
+)
