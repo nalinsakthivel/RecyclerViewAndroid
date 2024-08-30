@@ -1,5 +1,6 @@
 package com.n.rv
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,13 +20,19 @@ class ProductList : Fragment() {
     private lateinit var viewModel: ProductViewModel
     private val tag: String = "ProductList"
     private var scrollPosition: Int = 0
+    private lateinit var fragmentContext: Context
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentContext = context
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProductListBinding.inflate(inflater, container, false)
-        viewModel= ViewModelProvider(this)[ProductViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ProductViewModel::class.java]
         binding.customHeader.apply {
             title.text = getString(R.string.product)
             backButton.setOnClickListener {
@@ -48,15 +55,16 @@ class ProductList : Fragment() {
         binding.customProgress.progressBar.visibility = View.VISIBLE
         binding.recyclerView.layoutManager?.scrollToPosition(scrollPosition)
         recycleViewAdapter = RecycleViewAdapter(products, mListener = {
-            scrollPosition = (binding.recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+            scrollPosition =
+                (binding.recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
             Log.d(tag, "onResponse: $it")
             val bundle = Bundle()
-            bundle.putSerializable("productData",it)
-            findNavController().navigate(R.id.product_list_fragment_action,bundle)
+            bundle.putSerializable("productData", it)
+            findNavController().navigate(R.id.product_list_fragment_action, bundle)
         })
         binding.customProgress.progressBar.visibility = View.GONE
         binding.recyclerView.apply {
-            setBackgroundColor(resources.getColor(R.color.white))
+            setBackgroundColor(fragmentContext.getColor(R.color.white))
         }
         binding.recyclerView.adapter = recycleViewAdapter
     }
