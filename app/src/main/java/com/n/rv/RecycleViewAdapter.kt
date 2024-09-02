@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 class RecycleViewAdapter(
-    private val dataList: List<GetAPIDataClass>,
-    private val mListener: (GetAPIDataClass?) -> Unit
+    private val dataList: List<ProductListDbModel>,
+    private val mListener: (ProductListDbModel?) -> Unit
 ) :
 
     RecyclerView.Adapter<RecycleViewAdapter.ModelViewHolder>() {
@@ -28,10 +28,10 @@ class RecycleViewAdapter(
         val dataClass = dataList[position]
 
         Glide.with(holder.itemView.context)
-            .load(dataClass.image)
+            .load(dataClass.productImage)
             .into(holder.rvImage)
 
-        holder.rvTitle.text = dataClass.title
+        holder.rvTitle.text = dataClass.productName
         holder.itemView.setOnClickListener {
             dataClass.let { it1 -> mListener.invoke(it1) }
         }

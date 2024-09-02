@@ -56,8 +56,8 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.glide)
     implementation(libs.logging.interceptor)
-    implementation ("androidx.room:room-runtime:2.5.2")
-    annotationProcessor ("androidx.room:room-compiler:2.5.2")
-    kapt("androidx.room:room-compiler:2.5.2")
-    implementation ("androidx.room:room-ktx:2.5.2")
+    implementation (libs.androidx.room.runtime)
+    annotationProcessor (libs.room.compiler)
+    kapt(libs.room.compiler)
+    implementation (libs.room.ktx)
 }

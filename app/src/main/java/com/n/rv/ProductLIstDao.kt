@@ -3,7 +3,6 @@ package com.n.rv
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Update
 
 @Dao
 interface ProductLIstDao {
@@ -11,8 +10,18 @@ interface ProductLIstDao {
     fun getAll(): List<ProductListDbModel>
 
     @Insert
-    fun insertAll(vararg productListDbModel: ProductListDbModel)
+    fun insertAll(productListDbModel: List<ProductListDbModel>?)
 
-    @Update
-    fun updateById(id: Int, productListDbModel: ProductListDbModel)
+    fun mapToProductListDbModel(getAPIDataClass: List<GetAPIDataClass>): List<ProductListDbModel> {
+        return getAPIDataClass.map {
+            ProductListDbModel(
+                it.title,
+                it.description,
+                it.image,
+                it.price,
+                it.category
+            )
+
+        }
+    }
 }

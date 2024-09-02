@@ -16,7 +16,7 @@ class ProductDetail : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val productData = arguments?.getSerializable("productData") as? GetAPIDataClass
+        val productData = arguments?.getSerializable("productData") as? ProductListDbModel
         binding = FragmentProductDetailBinding.inflate(inflater, container, false)
         binding.customHeader.apply {
             title.text = getString(R.string.product_detail)
@@ -26,9 +26,9 @@ class ProductDetail : Fragment() {
         }
 
         binding.apply {
-            Glide.with(requireContext()).load(productData?.image).into(productImage)
-            productName.text = productData?.title
-            productDescription.text = productData?.description
+            Glide.with(requireContext()).load(productData?.productImage).into(productImage)
+            productName.text = productData?.productName
+            productDescription.text = productData?.productDescription
         }
 
         return binding.root
