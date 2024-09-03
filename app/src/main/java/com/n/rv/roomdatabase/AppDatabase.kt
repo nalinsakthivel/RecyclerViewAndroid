@@ -1,9 +1,11 @@
-package com.n.rv
+package com.n.rv.roomdatabase
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.n.rv.roomdatabase.dao.ProductLIstDao
+import com.n.rv.roomdatabase.dbmodel.ProductListDbModel
 import kotlin.concurrent.Volatile
 
 

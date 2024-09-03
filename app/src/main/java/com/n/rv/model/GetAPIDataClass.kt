@@ -1,4 +1,4 @@
-package com.n.rv
+package com.n.rv.model
 
 import java.io.Serializable
 
