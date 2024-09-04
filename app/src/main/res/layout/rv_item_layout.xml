@@ -10,6 +10,7 @@
     android:focusable="true"
     app:cardCornerRadius="10dp"
     android:foreground="?android:attr/selectableItemBackground"
+    android:background="?android:attr/selectableItemBackground"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout

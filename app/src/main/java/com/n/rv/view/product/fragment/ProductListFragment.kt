@@ -3,6 +3,7 @@ package com.n.rv.view.product.fragment
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,7 +37,8 @@ class ProductList : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         fragmentContext = context
-        database = AppDatabase.getInstance(fragmentContext)
+        database = AppDatabase.getInstance(context)
+        Log.d("FragmentLifecycle", "onAttach called")
     }
 
     override fun onCreateView(
@@ -53,6 +55,7 @@ class ProductList : Fragment() {
             backButton.visibility = View.INVISIBLE
         }
         initViewModel(this.fragmentContext)
+        Log.d("FragmentLifecycle", "onCreateView called")
         return binding.root
     }
 
@@ -88,7 +91,7 @@ class ProductList : Fragment() {
             val bundle = Bundle().apply {
                 putSerializable("productData", it)
             }
-            Handler().postDelayed(Runnable{
+            Handler(Looper.getMainLooper()).postDelayed(Runnable{
               findNavController().navigate(R.id.product_list_fragment_action, bundle)
             }, 300)
         })
@@ -99,6 +102,41 @@ class ProductList : Fragment() {
             setBackgroundColor(fragmentContext.getColor(R.color.white))
         }
         binding.customProgress.progressBar.visibility = View.GONE
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("FragmentLifecycle", "onViewCreated called")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("FragmentLifecycle", "onStart called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("FragmentLifecycle", "onResume called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("FragmentLifecycle", "onPause called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("FragmentLifecycle", "onStop called")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("FragmentLifecycle", "onDestroyView called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("FragmentLifecycle", "onDestroy called")
     }
 
 }

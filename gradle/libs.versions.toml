@@ -19,6 +19,8 @@ roomKtxVersion = "2.5.2"
 kotlinxCoroutinesAndroid = "1.9.0-RC.2"
 kotlinxCoroutinesCore = "1.9.0-RC.2"
 roomRuntimeVersion = "2.5.2"
+dagger = "2.52"
+daggerCompiler = "2.52"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +42,8 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompilerVersion" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtxVersion" }
+dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
+dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "daggerCompiler" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
